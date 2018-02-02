@@ -1,0 +1,30 @@
+group 'com.vgrynishyn'
+version '1.0-SNAPSHOT'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+sourceSets {
+    main { java {srcDir 'src/main'}
+    }
+    test {      java { srcDir 'src/test/java' }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'org.testng:testng:6.10'
+    compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: 'latest.integration'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: 'latest.integration'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: 'latest.integration'
+}
