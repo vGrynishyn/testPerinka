@@ -65,21 +65,6 @@ public class SalesPage extends BasePage {
         return isSalePresent;
     }
 
-    public void cleanCheckBoxFilter(){
-        for (WebElement element : checkBoxChecked ) {
-            System.out.println(element.getText());
-            element.click();
-        }
-        applyFilterButton.click();
-    }
-
-    public SalesPage selectGirlShoesFilter(){
-        if(filterGirlShoes.isDisplayed())
-            filterGirlShoes.click();
-        applyFilterButton.click();
-        return this;
-    }
-
     public SalesPage selectBoysDemisezonFilter(){
         if(filterBoysDemisezon.isDisplayed())
             filterBoysDemisezon.click();
@@ -87,18 +72,8 @@ public class SalesPage extends BasePage {
         return this;
     }
 
-    public SalesPage selectBoysTwoFilters(){
-        if(isElementExists(filterBoysDemisezon))
-            filterBoysDemisezon.click();
-        if(isElementExists(filterBoysWinter))
-            filterBoysWinter.click();
-        applyFilterButton.click();
-        return this;
-    }
-
     public SalesPage selectFilters(String[]filter){
-        for(int i=0; i<filter.length; i++) {
-            String s = filter[i];
+        for (String s : filter) {
             switch (s) {
                 case "GirlShoes":
                     filterGirlShoes.click();
@@ -171,7 +146,7 @@ public class SalesPage extends BasePage {
         }
     }
 
-    public ArrayList<String> someFunction(int numOfPages){
+    public ArrayList<String> getExpectedFilterItems(int numOfPages){
         ArrayList<String> expectedFilteredItems = new ArrayList<>();
         for (int i = 0; i < numOfPages; i++) {
             ArrayList<String> allItems = getItemText();
@@ -194,5 +169,4 @@ public class SalesPage extends BasePage {
         }
         return linkTexts;
     }
-
 }

@@ -48,9 +48,9 @@ public class LocalTest {
         int numOfPages = new SalesPage().openSalesPage().selectFilters(new String[]{GIRLS_SHOES_FILTER}).getPagesNum();
         for (int i = 0; i < numOfPages; i++) {
             ArrayList<WebElement> items = new SalesPage().getItemElements();
-            for (int j = 0; j < items.size(); j++) {
-                boolean bActualPriceExists = new SalesPage().checkPriceExists(items.get(j));
-                softAssert.assertEquals(bActualPriceExists, true, String.format("Price does not exist for the following item(s): ", items.get(j).getText()));
+            for (WebElement item : items) {
+                boolean bActualPriceExists = new SalesPage().checkPriceExists(item);
+                softAssert.assertEquals(bActualPriceExists, true, String.format("Price does not exist for the following item(s): %s", item.getText()));
             }
             new SalesPage().clickSeeMoreButton();
         }
@@ -65,9 +65,9 @@ public class LocalTest {
         int numOfPages = new SalesPage().openSalesPage().selectBoysDemisezonFilter().getPagesNum();
         for (int i = 0; i < numOfPages; i++) {
             ArrayList<WebElement> items = new SalesPage().getItemElements();
-            for (int j = 0; j < items.size(); j++) {
-                boolean bActualPriceExists = new SalesPage().checkOrderNum(items.get(j));
-                softAssert.assertEquals(bActualPriceExists, true, String.format("Sneakers are present for the following item(s): ", items.get(j).getText()));
+            for (WebElement item : items) {
+                boolean bActualPriceExists = new SalesPage().checkOrderNum(item);
+                softAssert.assertEquals(bActualPriceExists, true, String.format("Sneakers are present for the following item(s): %s", item.getText()));
             }
             new SalesPage().clickSeeMoreButton();
         }
@@ -86,14 +86,14 @@ public class LocalTest {
          int actualNumOfItemsForTwoFilters  = 0;
 
          int numOfPages = new SalesPage().openSalesPage().selectFilters(new String[]{BOYS_DEMISESON_FILTER, BOYS_WINTER_FILTER}).getPagesNum();
-         expectedFilteredItems = new SalesPage().someFunction(numOfPages);
+         expectedFilteredItems = new SalesPage().getExpectedFilterItems(numOfPages);
          expectetNumOfItemsForTwoFilters = expectedFilteredItems.size();
 
          numOfPages = new SalesPage().openSalesPage().selectFilters(new String[]{BOYS_DEMISESON_FILTER}).getPagesNum();
-         actualfilterItems.addAll(new SalesPage().someFunction(numOfPages));
+         actualfilterItems.addAll(new SalesPage().getExpectedFilterItems(numOfPages));
 
          numOfPages = new SalesPage().openSalesPage().selectFilters(new String[]{BOYS_WINTER_FILTER}).getPagesNum();
-         actualfilterItems.addAll(new SalesPage().someFunction(numOfPages));
+         actualfilterItems.addAll(new SalesPage().getExpectedFilterItems(numOfPages));
          actualNumOfItemsForTwoFilters=actualfilterItems.size();
 
          if (expectetNumOfItemsForTwoFilters != actualNumOfItemsForTwoFilters) {
