@@ -27,7 +27,9 @@ public class SalesPage extends BasePage {
     private WebElement filterBoysWinter;
     @FindBy(xpath = ".//*[@class='filter__buttons']/button")
     private WebElement applyFilterButton;
-    @FindBy(xpath = ".//*[@class='btn btn__big']")
+//    @FindBy(xpath = ".//*[@class='btn btn__big']")
+//    private WebElement seeMoreButton;
+    @FindBy(css = "a.btn.btn__big")
     private WebElement seeMoreButton;
     @FindBy(xpath = ".//*[@class='pager']/ul/li")
     private List<WebElement> pageButtons;
